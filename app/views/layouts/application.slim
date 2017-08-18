@@ -1,0 +1,12 @@
+doctype html
+html
+  main
+    = yield
+  body
+    - if flash[:error]
+      .alert-box.u-background--alert
+        = flash[:error]
+    - if flash[:success]
+      .alert-box.u-background--success
+        i.fa.fa-check.u-hMargin
+        = flash[:success]

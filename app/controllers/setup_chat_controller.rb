@@ -1,5 +1,7 @@
 class SetupChatController < ActionController::Base
 
+  layout 'application'
+
   def index
     render 'username'
   end
@@ -11,13 +13,32 @@ class SetupChatController < ActionController::Base
   def start_chat
     session[:myself] = email
     session[:friend] = friend
-    # Validate username and friend
-    # if ok send to next page.
-    redirect_to chat_index_url and return
-    #render json: session, status: :ok
+    if validate(email, friend)
+      redirect_to chat_index_url and return
+    else
+      redirect_to root_url and return  
+    end
+  end
+
+  def validate(email, friend_email)
+    info = chat_validation_service.get_both_user_info(email, friend_email)
+    message = ''
+
+    if not info[:friend][:message].empty?
+      message = "#{message}. #{info[:friend][:message]}"
+      flash[:error] = message
+      return false
+    end
+
+    flash[:error] = ''
+    return true
   end
 
   private
+
+  def chat_validation_service
+    @chat_validation_service ||= ChatValidationService.new
+  end
 
   def email
     params[:users][:email]
@@ -27,10 +48,6 @@ class SetupChatController < ActionController::Base
 
   def friend
     params[:users][:friend]
-  end
-
-  def user_id
-    User.find_by(email: email).id
   rescue
     nil
   end
