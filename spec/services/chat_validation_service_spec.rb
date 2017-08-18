@@ -1,9 +1,10 @@
+require 'rails_helper'
+
 describe ChatValidationService do
-  describe 'attributes' do
-  end
-
+  let(:user1) { MockTestItems.user1 }
+  let(:user2) { MockTestItems.user2 }
+  
   it 'should return true' do
-  	expect(5).to eq 5
+  	expect(user1.username).to eq 'abc'
   end
-
 end
