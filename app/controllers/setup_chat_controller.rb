@@ -25,7 +25,7 @@ class SetupChatController < ActionController::Base
     message = ''
 
     if not info[:friend][:message].empty?
-      message = "#{message}. #{info[:friend][:message]}"
+      message = "#{info[:friend][:message]}"
       flash[:error] = message
       return false
     end
@@ -39,7 +39,7 @@ class SetupChatController < ActionController::Base
   private
 
   def chat_validation_service
-    @chat_validation_service ||= ChatValidationService.new(User.all)
+    @chat_validation_service ||= ChatValidationService.new(User.all.to_a)
   end
 
   def username
