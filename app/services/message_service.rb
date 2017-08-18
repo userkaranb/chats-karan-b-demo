@@ -1,13 +1,13 @@
 class MessageService
-  attr_reader :my_email,
+  attr_reader :my_username,
               :my_id,
-              :friend_email,
+              :friend_username,
               :friend_id
 
-  def initialize(my_email, my_id, friend_email, friend_id)
-    @my_email = my_email
+  def initialize(my_username, my_id, friend_username, friend_id)
+    @my_username = my_username
     @my_id = my_id
-    @friend_email = friend_email
+    @friend_username = friend_username
     @friend_id = friend_id
   end
 
@@ -34,7 +34,7 @@ class MessageService
     body = message.body
     created_at = message.created_at
     direction = message.user_id == my_id ? 1 : 0
-    sender = message.user_id == my_id ? my_email : friend_email
+    sender = message.user_id == my_id ? my_username : friend_username
     MessageWrapper.new(body: body, created_at: created_at, direction: direction, sender: sender)
   end
 end

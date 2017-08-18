@@ -3,26 +3,26 @@ class ChatValidationService
     @users = User.all
   end
 
-  def get_both_user_info(user_email, friend_email)
-  	my_info = get_my_id(user_email)
-  	friend_info = get_friend_id(friend_email)
+  def get_both_user_info(user_username, friend_username)
+  	my_info = get_my_id(user_username)
+  	friend_info = get_friend_id(friend_username)
 
   	{ :myself=>my_info, :friend=>friend_info }
   end
 
-  def get_my_id(user_email)
-  	user_id = try_get_user_id(user_email)
+  def get_my_id(user_username)
+  	user_id = try_get_user_id(user_username)
   	message = ''
   	if user_id.nil?
-  	  user_id = create_new_user(user_email).id
+  	  user_id = create_new_user(user_username).id
   	  puts 'User did not previously exist, new user was created'
   	end
 
   	package_response(user_id, message)
   end
 
-  def get_friend_id(friend_email)
-  	id = try_get_user_id(friend_email)
+  def get_friend_id(friend_username)
+  	id = try_get_user_id(friend_username)
   	message = ''
   	if id.nil?
   		message = 'friend does not exist. Cannot start chat'
@@ -31,14 +31,14 @@ class ChatValidationService
   	package_response(id, message)
   end
 
-  def try_get_user_id(user_email)
-    @users.find_by(email: user_email).id
+  def try_get_user_id(user_username)
+    @users.find_by(username: user_username).id
   rescue
   	nil
   end
 
-  def create_new_user(user_email)
-  	User.create(email: user_email)
+  def create_new_user(user_username)
+  	User.create(username: user_username)
   end
 
   def package_response(user_id, message)

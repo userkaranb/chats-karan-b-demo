@@ -11,17 +11,17 @@ class SetupChatController < ActionController::Base
   end
 
   def start_chat
-    session[:my_email] = email
-    session[:friend_email] = friend
-    if validate(email, friend)
+    session[:my_username] = username
+    session[:friend_username] = friend
+    if validate(username, friend)
       redirect_to chat_index_url and return
     else
       redirect_to root_url and return  
     end
   end
 
-  def validate(email, friend_email)
-    info = chat_validation_service.get_both_user_info(email, friend_email)
+  def validate(username, friend_username)
+    info = chat_validation_service.get_both_user_info(username, friend_username)
     message = ''
 
     if not info[:friend][:message].empty?
@@ -42,8 +42,8 @@ class SetupChatController < ActionController::Base
     @chat_validation_service ||= ChatValidationService.new
   end
 
-  def email
-    params[:users][:email]
+  def username
+    params[:users][:username]
   rescue
     nil
   end
