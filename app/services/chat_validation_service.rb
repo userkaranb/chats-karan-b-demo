@@ -1,6 +1,6 @@
 class ChatValidationService
-  def initialize()
-    @users = User.all
+  def initialize(users)
+    @users = users
   end
 
   def get_both_user_info(user_username, friend_username)

@@ -39,7 +39,7 @@ class SetupChatController < ActionController::Base
   private
 
   def chat_validation_service
-    @chat_validation_service ||= ChatValidationService.new
+    @chat_validation_service ||= ChatValidationService.new(User.all)
   end
 
   def username
