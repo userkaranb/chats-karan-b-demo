@@ -23,8 +23,12 @@ class MessageService
 
   private
 
+  def all_messages
+    Message.all
+  end
+
   def get_conversation_history_from_db
-    Message.all.select do |message|
+    all_messages.select do |message|
       (message.user_id == my_id and message.to_id == friend_id) ||
       (message.user_id == friend_id and message.to_id == my_id) 
     end
