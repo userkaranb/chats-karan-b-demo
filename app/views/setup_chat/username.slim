@@ -1,0 +1,10 @@
+div.row
+  = form_for :users, url: setup_chat_index_path() do |form|
+    td
+      = form.label :email, id: "#new-name"
+      = form.text_field :email, id: "#new-name"
+    td
+      = form.label :friend, id: "#new-name"
+      = form.text_field :friend, id: "#new-name"
+
+    = form.submit "Save!", class: 'button'

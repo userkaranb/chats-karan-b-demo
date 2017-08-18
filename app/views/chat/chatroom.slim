@@ -1,0 +1,16 @@
+= javascript_include_tag 'application'
+
+.messagingContainer
+  .messaging
+    .messaging-header
+      strong Chat with your friend
+    .messaging-history
+      ul.messages-container
+        .hide
+          li
+    /! end messaging-history
+    .
+      textarea.messaging-textArea placeholder="Message your friend"
+      button.btn.is-sendingMessage Send
+    /! end chat-message
+  /! end chat
