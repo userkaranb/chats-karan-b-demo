@@ -44,6 +44,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.4'
   gem 'pry', '~> 0.10.3'
+  gem 'rails-controller-testing'
 end
 
 group :development do
