@@ -24,7 +24,7 @@ class MessageService
   private
 
   def all_messages
-    Message.all
+    my_user.messages + friend_user.messages
   end
 
   def get_conversation_history_from_db
@@ -32,6 +32,14 @@ class MessageService
       (message.user_id == my_id and message.to_id == friend_id) ||
       (message.user_id == friend_id and message.to_id == my_id) 
     end
+  end
+
+  def my_user
+    @my_user ||= User.find(my_id)
+  end
+
+  def friend_user
+    @friend_user ||= User.find(friend_id)
   end
 
   def wrap_message(message)
