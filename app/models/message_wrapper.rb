@@ -4,7 +4,6 @@ class MessageWrapper
               :direction,
               :sender
 
-  # rubocop:disable Metrics/ParameterLists
   def initialize(
     body:,
     created_at:,

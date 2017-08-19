@@ -24,7 +24,7 @@ class MessageService
   private
 
   def all_messages
-    my_user.messages + friend_user.messages
+    (my_user.messages + friend_user.messages).sort_by(&:created_at)
   end
 
   def get_conversation_history_from_db
@@ -35,11 +35,11 @@ class MessageService
   end
 
   def my_user
-    @my_user ||= User.find(my_id)
+    User.find(my_id)
   end
 
   def friend_user
-    @friend_user ||= User.find(friend_id)
+    User.find(friend_id)
   end
 
   def wrap_message(message)

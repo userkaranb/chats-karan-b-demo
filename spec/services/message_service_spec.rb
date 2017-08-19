@@ -85,4 +85,25 @@ describe MessageService do
     expect(my_perspective.get_conversation_history.count).to eq 5
     expect(friends_perspective.get_conversation_history.count).to eq 5
   end
+
+  it 'should have the messages in the correct order' do
+    user1.save
+    user2.save
+    Message.create(user_id: 1, to_id: 2, body: 'Hello user 2, its user 1')
+    Message.create(user_id: 2, to_id: 1, body: 'Hello user 1, its user 2. Good morning.')
+    Message.create(user_id: 2, to_id: 1, body: 'Ok.')
+
+    my_perspective = MessageService.new(MockTestItems.create_fake_session_hash(user1, user2))
+    friends_perspective = MessageService.new(MockTestItems.create_fake_session_hash(user2, user1))
+
+    my_history = my_perspective.get_conversation_history
+    expect(my_history.first.body).to eq 'Hello user 2, its user 1'
+    expect(my_history.second.body).to eq 'Hello user 1, its user 2. Good morning.'
+    expect(my_history.third.body).to eq 'Ok.'
+
+    friend_history = friends_perspective.get_conversation_history
+    expect(friend_history.first.body).to eq 'Hello user 2, its user 1'
+    expect(friend_history.second.body).to eq 'Hello user 1, its user 2. Good morning.'
+    expect(friend_history.third.body).to eq 'Ok.'
+  end
 end
