@@ -8,6 +8,27 @@ describe SetupChatController, type: :controller do
     end
   end
 
+  describe 'POST #register_user' do
+    it 'should create a new user' do
+      params = {
+        setup_chat_id: 1,
+        users: {
+          new_user: 'xyz'
+        }
+      }
+      SetupChatController.any_instance.stub(
+        :run_register_rake_task
+      ).and_return(true)
+
+      expect_any_instance_of(SetupChatController).to receive(
+        :run_register_rake_task
+      )
+      post :register_user, params: params
+      expect(response).to redirect_to(root_url)
+
+    end
+  end
+
   describe 'POST #create' do
     let(:user1) { MockTestItems.user1 }
     let(:user2) { MockTestItems.user2 }

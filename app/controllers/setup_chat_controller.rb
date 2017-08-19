@@ -11,7 +11,7 @@ class SetupChatController < ActionController::Base
   end
 
   def register_user
-    %x[rake registration:create_new_user[#{params[:users][:new_user]}]]
+    run_register_rake_task
     redirect_to root_url and return  
   end
 
@@ -39,6 +39,10 @@ class SetupChatController < ActionController::Base
     session[:my_id] = info[:myself][:user_id]
     session[:friend_id] = info[:friend][:user_id]
     return true
+  end
+
+  def run_register_rake_task
+    %x[rake registration:create_new_user[#{params[:users][:new_user]}]]
   end
 
   private
