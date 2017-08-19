@@ -4,7 +4,7 @@ describe MessageController, type: :controller do
   let(:user1) { MockTestItems.user1 }
   let(:user2) { MockTestItems.user2 }
   let(:messages) { MockTestItems.example_messages }
-  let(:message_service) { MessageService.new(user1.username, user1.id, user2.username, user2.id) }
+  let(:message_service) { MessageService.new(MockTestItems.create_fake_session_hash(user1, user2)) }
   before(:each) do
   	MessageService.any_instance.stub(
   	  :all_messages

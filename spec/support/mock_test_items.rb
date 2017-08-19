@@ -23,6 +23,15 @@ class MockTestItems
       messages.append(Message.create(user_id: 1, to_id: 1, body: 'Note to self: Buy Groceries.'))
       messages
     end
+
+    def create_fake_session_hash(me, friend)
+      session = {}
+      session[:my_username] = me.username
+      session[:my_id] = me.id
+      session[:friend_username] = friend.username
+      session[:friend_id] = friend.id
+      session
+    end
   end
 end
 

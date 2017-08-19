@@ -12,7 +12,7 @@ describe MessageService do
       ).and_return(messages)
     end
 
-    subject { MessageService.new(user1.username, user1.id, user2.username, user2.id) }
+    subject { MessageService.new(MockTestItems.create_fake_session_hash(user1, user2)) }
     
     it 'should return the correct history for users 1 and 2' do
       history = subject.get_conversation_history
@@ -27,7 +27,7 @@ describe MessageService do
     end
 
     it 'should return the same messages for users 1 and 2 through the perspective of the friend' do
-      service = MessageService.new(user2.username, user2.id, user1.username, user1.id)
+      service = MessageService.new(MockTestItems.create_fake_session_hash(user2, user1))
       history = subject.get_conversation_history
       expect(history.count).to eq 3
       expected_message_bodies = [
@@ -40,7 +40,7 @@ describe MessageService do
     end
 
     it 'should return the correct history for messages to myself' do
-      service = MessageService.new(user1.username, user1.id, user1.username, user1.id)
+      service = MessageService.new(MockTestItems.create_fake_session_hash(user1, user1))
       history = service.get_conversation_history
       expect(history.count).to eq 1
       expected_message_bodies = ['Note to self: Buy Groceries.']
@@ -48,7 +48,7 @@ describe MessageService do
     end
 
     it 'should return no history for users that have never talked' do
-      service = MessageService.new(user2.username, user2.id, user2.username, user2.id)
+      service = MessageService.new(MockTestItems.create_fake_session_hash(user2, user2))
       history = service.get_conversation_history
       expect(history.count).to eq 0
     end
@@ -71,8 +71,8 @@ describe MessageService do
     Message.create(user_id: 1, to_id: 2, body: 'Good Morning to you too.')
     Message.create(user_id: 1, to_id: 1, body: 'Note to self: Buy Groceries.')
 
-    my_perspective = MessageService.new(user1.username, user1.id, user2.username, user2.id)
-    friends_perspective = MessageService.new(user2.username, user2.id, user1.username, user1.id)
+    my_perspective = MessageService.new(MockTestItems.create_fake_session_hash(user1, user2))
+    friends_perspective = MessageService.new(MockTestItems.create_fake_session_hash(user2, user1))
 
     expect(my_perspective.get_conversation_history.count).to eq 3
     expect(friends_perspective.get_conversation_history.count).to eq 3

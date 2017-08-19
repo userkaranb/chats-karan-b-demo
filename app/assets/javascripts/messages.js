@@ -25,6 +25,7 @@
   }
 
   function renderMessage(message) {
+    console.log(message)
     $(".messages-container").append(
       "<li> \
         <div> \

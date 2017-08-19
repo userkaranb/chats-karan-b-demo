@@ -18,7 +18,7 @@ class MessageController < ActionController::Base
   end
 
   def message_service
-    @message_service ||= MessageService.new(session[:my_email], session[:my_id], session[:friend_email], session[:friend_id])
+    @message_service ||= MessageService.new(session)
   end
 
 end

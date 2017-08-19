@@ -11,8 +11,6 @@ class SetupChatController < ActionController::Base
   end
 
   def start_chat
-    session[:my_username] = username
-    session[:friend_username] = friend
     if validate(username, friend)
       redirect_to chat_index_url and return
     else
@@ -31,6 +29,8 @@ class SetupChatController < ActionController::Base
     end
 
     flash[:error] = ''
+    session[:my_username] = username
+    session[:friend_username] = friend_username
     session[:my_id] = info[:myself][:user_id]
     session[:friend_id] = info[:friend][:user_id]
     return true

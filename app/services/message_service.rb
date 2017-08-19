@@ -4,11 +4,11 @@ class MessageService
               :friend_username,
               :friend_id
 
-  def initialize(my_username, my_id, friend_username, friend_id)
-    @my_username = my_username
-    @my_id = my_id
-    @friend_username = friend_username
-    @friend_id = friend_id
+  def initialize(session)
+    @my_username = session[:my_username]
+    @my_id = session[:my_id]
+    @friend_username = session[:friend_username]
+    @friend_id = session[:friend_id]
   end
 
   def get_conversation_history
