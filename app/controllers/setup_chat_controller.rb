@@ -11,7 +11,8 @@ class SetupChatController < ActionController::Base
   end
 
   def register_user
-    binding.pry
+    %x[rake registration:create_new_user[#{params[:users][:new_user]}]]
+    redirect_to root_url and return  
   end
 
   def start_chat

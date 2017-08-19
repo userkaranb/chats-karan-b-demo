@@ -3,19 +3,21 @@ div.row
     td
       = form.label :username, id: "#new-name"
       = form.text_field :username, id: "#new-name"
+    br
     td
       = form.label :friend, id: "#new-name"
       = form.text_field :friend, id: "#new-name"
 
-    = form.submit "Save!", class: 'button'
+    = form.submit "Go to Chat", class: 'button'
+
+br
+br
+br
 
 div.row
-  = form_for :users, url: setup_chat_index_path() do |form|
+  = form_for :users, url: setup_chat_register_user_path(1) do |form|
     td
-      = form.label :username, id: "#new-name"
-      = form.text_field :username, id: "#new-name"
-    td
-      = form.label :friend, id: "#new-name"
-      = form.text_field :friend, id: "#new-name"
+      = form.label 'Register a new User before getting started' 	, id: "#register-name"
+      = form.text_field :new_user, id: "#register-name"
 
     = form.submit "Save!", class: 'button'
