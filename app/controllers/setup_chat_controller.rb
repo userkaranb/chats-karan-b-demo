@@ -10,6 +10,10 @@ class SetupChatController < ActionController::Base
     start_chat
   end
 
+  def register_user
+    binding.pry
+  end
+
   def start_chat
     if validate(username, friend)
       redirect_to chat_index_url and return

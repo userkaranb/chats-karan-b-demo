@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   root 'setup_chat#index'
 
   resources :setup_chat, only: [:index, :create] do
-    get '/username' => 'chat#enter_username'
-    post '/start_chat' => 'chat#start_chat'
+    post '/register_user' => 'setup_chat#register_user'
   end
 
   resources :chat, only: [:index] do

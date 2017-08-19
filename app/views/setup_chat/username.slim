@@ -8,3 +8,14 @@ div.row
       = form.text_field :friend, id: "#new-name"
 
     = form.submit "Save!", class: 'button'
+
+div.row
+  = form_for :users, url: setup_chat_index_path() do |form|
+    td
+      = form.label :username, id: "#new-name"
+      = form.text_field :username, id: "#new-name"
+    td
+      = form.label :friend, id: "#new-name"
+      = form.text_field :friend, id: "#new-name"
+
+    = form.submit "Save!", class: 'button'
