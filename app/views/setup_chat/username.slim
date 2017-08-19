@@ -17,7 +17,7 @@ br
 div.row
   = form_for :users, url: setup_chat_register_user_path(1) do |form|
     td
-      = form.label 'Register a new User before getting started' 	, id: "#register-name"
+      = form.label 'Register a new User before getting started'   , id: "#register-name"
       = form.text_field :new_user, id: "#register-name"
 
     = form.submit "Save!", class: 'button'

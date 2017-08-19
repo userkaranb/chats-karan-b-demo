@@ -6,13 +6,13 @@ describe MessageController, type: :controller do
   let(:messages) { MockTestItems.example_messages }
   let(:message_service) { MessageService.new(MockTestItems.create_fake_session_hash(user1, user2)) }
   before(:each) do
-  	MessageService.any_instance.stub(
-  	  :all_messages
-	).and_return(messages)
+    MessageService.any_instance.stub(
+      :all_messages
+  ).and_return(messages)
 
-  	MessageController.any_instance.stub(
-  	  :message_service
-	).and_return(message_service)
+    MessageController.any_instance.stub(
+      :message_service
+  ).and_return(message_service)
   end
 
   describe 'GET #index' do
@@ -23,13 +23,13 @@ describe MessageController, type: :controller do
   end
 
   describe 'POST #create' do
-  	it 'should respond with the newly created message' do
-  	  params = {
-  	  	body: 'This is a new message'
-  	  }
+    it 'should respond with the newly created message' do
+      params = {
+        body: 'This is a new message'
+      }
 
-  	  post :create, params: params
-  	  expect(response.body).to eq "{\"body\":\"This is a new message\",\"created_at\":null,\"direction\":1,\"sender\":\"abc\"}"
-  	end
+      post :create, params: params
+      expect(response.body).to eq "{\"body\":\"This is a new message\",\"created_at\":null,\"direction\":1,\"sender\":\"abc\"}"
+    end
   end
 end

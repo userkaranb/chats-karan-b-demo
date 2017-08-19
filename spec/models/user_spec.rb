@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe User do
   def try_save(user)
-  	user.save
-  	true
+    user.save
+    true
   rescue
-  	false
+    false
   end
 
   it 'cannot have an nil username' do

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :chat, only: [:index] do
-  	get '/all_messages' => 'chat#all_messages'
+    get '/all_messages' => 'chat#all_messages'
   end
 
   resources :message, only: [:index, :create] do
