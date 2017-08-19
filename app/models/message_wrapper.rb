@@ -1,7 +1,8 @@
 class MessageWrapper
   attr_reader :body,
               :created_at,
-              :direction
+              :direction,
+              :sender
 
   # rubocop:disable Metrics/ParameterLists
   def initialize(
