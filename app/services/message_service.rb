@@ -18,7 +18,7 @@ class MessageService
   end
 
   def create_new_message(body)
-    Message.create(user_id: my_id, to_id: friend_id, body: body)
+    wrap_message(Message.create(user_id: my_id, to_id: friend_id, body: body))
   end
 
   private

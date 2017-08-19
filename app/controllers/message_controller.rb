@@ -5,7 +5,7 @@ class MessageController < ActionController::Base
   end
 
   def create
-    message_service.create_new_message(params['body'])
+    respond_with_message(message_service.create_new_message(params['body']))
   end
 
   private
